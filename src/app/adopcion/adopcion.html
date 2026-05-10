@@ -1,0 +1,112 @@
+<div class="auth-bg">
+  <div class="auth-card">
+
+    <div class="auth-header">
+      <img src="https://img.magnific.com/foto-gratis/retrato-grupo-adorables-cachorros_53876-64778.jpg?semt=ais_hybrid&w=740&q=80">
+      <h2 class="mb-0">Solicitud de adopción</h2>
+      <small class="text-muted">Indica tus preferencias y datos de contacto</small>
+    </div>
+
+    <div class="auth-body">
+      <form #f="ngForm" novalidate>
+
+        <h5 class="mb-3">🐾 Preferencias de adopción</h5>
+
+        <div class="mb-3">
+          <label class="form-label">Tipo de mascota *</label>
+          <select class="form-select" required [(ngModel)]="preferencias.tipoMascota" name="tipoMascota">
+            <option value="">Seleccione</option>
+            <option value="Perro">Perro</option>
+            <option value="Gato">Gato</option>
+            <option value="Gato">Pajaro</option>
+            <option value="Gato">Hamster</option>
+            <option value="Gato">Otro</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Tamaño preferido</label>
+          <select class="form-select" [(ngModel)]="preferencias.tamano" name="tamano">
+            <option>Indistinto</option>
+            <option>Pequeño</option>
+            <option>Mediano</option>
+            <option>Grande</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Edad preferida</label>
+          <select class="form-select" [(ngModel)]="preferencias.edad" name="edad">
+            <option>Indistinta</option>
+            <option>Cachorro</option>
+            <option>Adulto</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Sexo preferido</label>
+          <select class="form-select" [(ngModel)]="preferencias.sexo" name="sexo">
+            <option>Indistinto</option>
+            <option>Macho</option>
+            <option>Hembra</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">¿Acepta mascota mestiza?</label>
+          <select class="form-select" [(ngModel)]="preferencias.aceptaMestizo" name="aceptaMestizo">
+            <option>Sí</option>
+            <option>No</option>
+            <option>Talvez</option>
+          </select>
+        </div>
+
+        <hr class="my-4">
+
+        <h5 class="mb-3">👤 Datos del responsable</h5>
+
+        <input class="form-control mb-2" placeholder="Nombre completo *" required
+               [(ngModel)]="adoptante.nombreCompleto" name="nombre">
+
+        <input class="form-control mb-2" placeholder="RUT *" required
+               [(ngModel)]="adoptante.rut" (blur)="validarRutEnBlur()" name="rut">
+
+        <input class="form-control mb-2" placeholder="Teléfono *" required
+               [(ngModel)]="adoptante.telefono" name="telefono">
+
+        <input class="form-control mb-2" type="email" placeholder="Correo *" required
+               [(ngModel)]="adoptante.email" name="email">
+
+        <input class="form-control mb-2" placeholder="Dirección *" required
+               [(ngModel)]="adoptante.direccion" name="direccion">
+
+        <input class="form-control mb-2" placeholder="Comuna *" required
+               [(ngModel)]="adoptante.comuna" name="comuna">
+
+        <input class="form-control mb-3" placeholder="Región *" required
+               [(ngModel)]="adoptante.region" name="region">
+
+        <textarea class="form-control mb-3" rows="3"
+                  placeholder="Comentarios adicionales"
+                  [(ngModel)]="adoptante.comentarios"
+                  name="comentarios"></textarea>
+
+        <button class="btn btn-success w-100"
+                type="button"
+                [disabled]="f.invalid || rutInvalido || enviando"
+                (click)="guardarSolicitud()">
+          Enviar solicitud
+        </button>
+
+        <div class="text-success mt-3 text-center" *ngIf="mensajeOk">
+          {{ mensajeOk }}
+        </div>
+
+        <div class="text-danger mt-3 text-center" *ngIf="mensajeError">
+          {{ mensajeError }}
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

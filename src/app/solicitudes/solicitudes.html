@@ -1,0 +1,63 @@
+<div class="container mt-5" style="max-width: 900px;">
+
+  <h2 class="text-center mb-4">📋 Mis solicitudes</h2>
+
+  <div *ngIf="solicitudes.length === 0" class="text-center text-muted">
+    No hay solicitudes registradas.
+  </div>
+
+  <div class="card mb-3 shadow-sm" *ngFor="let s of solicitudes; let i = index">
+    <div class="card-body">
+
+      <!-- CABECERA -->
+      <div class="d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Solicitud #{{ s.id }}</h5>
+        <span class="badge bg-info text-dark">{{ s.estado }}</span>
+      </div>
+
+      <small class="text-muted">
+        📅 Registrada el {{ s.fechaRegistro }}
+      </small>
+
+      <hr>
+
+      <!-- PREFERENCIAS -->
+      <h6>🐾 Preferencias de adopción</h6>
+      <p>
+        <b>Tipo:</b> {{ s.preferencias.tipoMascota }} |
+        <b>Tamaño:</b> {{ s.preferencias.tamano }} |
+        <b>Edad:</b> {{ s.preferencias.edad }} |
+        <b>Sexo:</b> {{ s.preferencias.sexo }} |
+        <b>Mestizo:</b> {{ s.preferencias.aceptaMestizo }}
+      </p>
+
+      <hr>
+
+      <!-- RESPONSABLE -->
+      <h6>👤 Responsable</h6>
+      <p class="mb-1">
+        {{ s.adoptante.nombreCompleto }} – {{ s.adoptante.telefono }}
+      </p>
+      <small class="text-muted">
+        {{ s.adoptante.comuna }}, {{ s.adoptante.region }}
+      </small>
+
+      <!-- ACCIONES -->
+      <div class="mt-3 d-flex gap-2">
+        <button
+          class="btn btn-outline-danger btn-sm"
+          (click)="eliminarSolicitud(i)">
+          🗑 Eliminar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- NAVEGACIÓN -->
+  <div class="text-center mt-4 d-flex gap-3 justify-content-center">
+    <a routerLink="/inicio" class="btn btn-secondary">🏠 Volver al inicio</a>
+    <a routerLink="/adopcion" class="btn btn-success">➕ Nueva solicitud</a>
+  </div>
+
+</div>

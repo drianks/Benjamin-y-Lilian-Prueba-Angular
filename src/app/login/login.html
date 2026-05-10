@@ -1,0 +1,45 @@
+<div class="auth-bg">
+  <div class="auth-card">
+    <div class="auth-header">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0cRKbjZf_mY3ccbvdujJNO2JdtcrzZDwANQ&s" alt="Huella">
+      <h2 class="mb-0">Inicio de sesión</h2>
+      <small class="text-muted">Adopción de Mascotas</small>
+    </div>
+
+    <div class="auth-body">
+      <div class="mb-3">
+        <label class="form-label">Nombre de usuario</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Ingrese su nombre de usuario"
+          [(ngModel)]="usuario">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Ingrese su contraseña"
+          [(ngModel)]="password">
+      </div>
+
+      <button class="btn btn-primario w-100 py-2" (click)="login()">
+        Ingresar
+      </button>
+
+      <div class="text-danger mt-3 text-center" *ngIf="mensajeError">
+        {{ mensajeError }}
+      </div>
+
+      <div class="text-center mt-3">
+        <a routerLink="/registro" class="link-suave">Crear nuevo usuario</a>
+      </div>
+
+      <div class="text-center mt-2">
+        <a routerLink="/acerca" class="text-muted text-decoration-none">Acerca de</a>
+      </div>
+    </div>
+  </div>
+</div>

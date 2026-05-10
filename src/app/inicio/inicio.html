@@ -1,0 +1,31 @@
+<div class="auth-bg">
+  <div class="auth-card text-center">
+
+    <div class="auth-header">
+      <h2 class="mb-2">👋 Bienvenido</h2>
+      <small class="text-muted">¿Qué deseas hacer?</small>
+    </div>
+
+    <div class="auth-body d-grid gap-3">
+
+      <button
+        class="btn btn-success py-3"
+        (click)="irAdopcion()">
+        🐾 Adoptar mascota
+      </button>
+
+      <button
+        class="btn btn-primary py-3"
+        (click)="irSeguimiento()">
+        📋 Mis solicitudes
+      </button>
+
+      <button
+        class="btn btn-outline-danger"
+        (click)="cerrarSesion()">
+        🔒 Cerrar sesión
+      </button>
+
+    </div>
+  </div>
+</div>

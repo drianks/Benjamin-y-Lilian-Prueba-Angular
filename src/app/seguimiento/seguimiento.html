@@ -1,0 +1,144 @@
+<div class="auth-bg">
+  <div class="auth-card">
+
+    <div class="auth-header">
+      <!-- ✅ SE MANTIENE LA IMAGEN -->
+      <img src="https://thumbs.dreamstime.com/b/mano-humana-sosteniendo-suavemente-la-pata-de-perro-sobre-fondo-blanco-un-reconfortante-disparo-en-armario-captura-momento-tierno-399544977.jpg"
+           alt="Huella">
+      <h2 class="mb-0">Seguimiento de solicitudes</h2>
+      <small class="text-muted">
+        Aquí puedes ver el estado y el registro de tus solicitudes
+      </small>
+    </div>
+
+    <div class="auth-body">
+
+      <!-- SIN SOLICITUDES -->
+      <div class="alert alert-info" *ngIf="solicitudes.length === 0">
+        Aún no tienes solicitudes registradas.
+      </div>
+
+      <!-- SOLICITUDES -->
+      <div class="card mb-3 shadow-sm" *ngFor="let s of solicitudes; let i = index">
+        <div class="card-body">
+
+          <!-- CABECERA -->
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="mb-0">Solicitud #{{ s.id }}</h5>
+            <span class="badge bg-info text-dark">{{ s.estado }}</span>
+          </div>
+
+          <small class="text-muted">
+            📅 Registrada el {{ s.fechaRegistro }}
+          </small>
+
+          <!-- ESTADO -->
+          <div class="alert alert-secondary py-2 mt-3 mb-3">
+            <b>Estado actual:</b> {{ s.estado }} <br>
+            <small class="text-muted">
+              {{ descripcionEstado(s.estado) }}
+            </small>
+          </div>
+
+          <!-- LÍNEA DE PROGRESO -->
+          <div class="mb-3">
+            <div class="d-flex flex-column gap-2">
+              <div *ngFor="let paso of pasos; let idx = index"
+                   class="d-flex align-items-center gap-2">
+                <span class="badge"
+                      [class.bg-success]="idx <= indicePaso(s.estado)"
+                      [class.bg-secondary]="idx > indicePaso(s.estado)">
+                  {{ idx + 1 }}
+                </span>
+                <span [class.fw-semibold]="idx === indicePaso(s.estado)">
+                  {{ paso }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DETALLES -->
+          <details>
+            <summary class="mb-2">Ver detalles de la solicitud</summary>
+
+            <div class="row g-2">
+
+              <!-- PREFERENCIAS -->
+              <div class="col-12">
+                <h6 class="mt-2">🐾 Preferencias de adopción</h6>
+              </div>
+
+              <div class="col-12">
+                <b>Tipo de mascota:</b> {{ s.preferencias.tipoMascota }} |
+                <b>Tamaño:</b> {{ s.preferencias.tamano }} |
+                <b>Edad:</b> {{ s.preferencias.edad }} |
+                <b>Sexo:</b> {{ s.preferencias.sexo }} |
+                <b>Mestizo:</b> {{ s.preferencias.aceptaMestizo }}
+              </div>
+
+              <hr class="my-2">
+
+              <!-- RESPONSABLE -->
+              <div class="col-12">
+                <h6>👤 Datos del responsable</h6>
+              </div>
+
+              <div class="col-12">
+                <b>Nombre:</b> {{ s.adoptante.nombreCompleto }}
+              </div>
+
+              <div class="col-6">
+                <b>RUT:</b> {{ s.adoptante.rut }}
+              </div>
+
+              <div class="col-6">
+                <b>Teléfono:</b> {{ s.adoptante.telefono }}
+              </div>
+
+              <div class="col-12">
+                <b>Correo:</b> {{ s.adoptante.email }}
+              </div>
+
+              <div class="col-12">
+                <b>Dirección:</b>
+                {{ s.adoptante.direccion }},
+                {{ s.adoptante.comuna }},
+                {{ s.adoptante.region }}
+              </div>
+
+              <div class="col-12" *ngIf="s.adoptante.comentarios">
+                <b>Comentarios:</b> {{ s.adoptante.comentarios }}
+              </div>
+
+            </div>
+          </details>
+
+          <hr class="my-3">
+
+          <!-- ACCIONES -->
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary btn-sm" routerLink="/adopcion">
+              ➕ Nueva solicitud
+            </button>
+
+            <button
+              class="btn btn-outline-danger btn-sm"
+              *ngIf="s.estado === 'En evaluación'"
+              (click)="eliminarSolicitud(i)">
+              🗑 Eliminar
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- NAVEGACIÓN -->
+      <div class="text-center mt-4">
+        <a routerLink="/inicio" class="btn btn-secondary">
+          🏠 Volver al inicio
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>

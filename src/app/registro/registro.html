@@ -1,0 +1,65 @@
+<div class="auth-bg">
+  <div class="auth-card">
+    <div class="auth-header">
+      <img src="https://cdn.pixabay.com/photo/2020/10/18/19/31/cat-5665915_1280.jpg" alt="Huella">
+      <h2 class="mb-0">Registro de usuario</h2>
+      <small class="text-muted">Solo mayores de 18 años</small>
+    </div>
+
+    <div class="auth-body">
+      <div class="mb-3">
+        <label class="form-label">Nombre de usuario</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Cree un nombre de usuario"
+          [(ngModel)]="usuario">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Fecha de nacimiento</label>
+        <input
+          type="date"
+          class="form-control"
+          [(ngModel)]="fechaNacimiento">
+        <small class="text-muted d-block mt-1" *ngIf="edadCalculada !== null">
+          Edad calculada: <b>{{ edadCalculada }}</b> años
+        </small>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Cree una contraseña (mínimo 6 caracteres)"
+          [(ngModel)]="password">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Repetir contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Repita su contraseña"
+          [(ngModel)]="password2">
+      </div>
+
+      <button class="btn btn-success w-100 py-2" (click)="registrar()">
+        Registrar
+      </button>
+
+      <div class="text-danger mt-3 text-center" *ngIf="mensajeError">
+        {{ mensajeError }}
+      </div>
+
+      <div class="text-success mt-3 text-center" *ngIf="mensajeOk">
+        {{ mensajeOk }}
+      </div>
+
+      <div class="text-center mt-3">
+        <a routerLink="/" class="link-suave">Volver al inicio de sesión</a>
+      </div>
+    </div>
+  </div>
+</div>
